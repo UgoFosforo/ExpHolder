@@ -1,0 +1,19 @@
+name: ExpHolder
+version: '${project.version}'
+main: me.architetto.expholder.ExpHolder
+api-version: 1.18
+authors: [ Architetto ]
+commands:
+  expholder:
+    description: Plugin per la gestione delle fortezze.
+
+permissions:
+  expholder.hold:
+    description: hold command permission
+    default: true
+  expholder.take:
+    description: take command permission
+    default: true
+  expholder.list:
+    description: list command permission
+    default: op
