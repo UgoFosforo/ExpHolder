@@ -8,11 +8,11 @@ commands:
     description: expholder command
 
 permissions:
-  expholder.hold:
-    description: hold command permission
+  expholder.deposit:
+    description: deposit command permission
     default: true
-  expholder.take:
-    description: take command permission
+  expholder.withdraw:
+    description: withdraw command permission
     default: true
   expholder.list:
     description: list command permission

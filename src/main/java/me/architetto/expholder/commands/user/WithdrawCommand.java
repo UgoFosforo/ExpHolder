@@ -7,10 +7,10 @@ import org.bukkit.entity.Player;
 
 import java.util.List;
 
-public class HoldCommand extends SubCommand {
+public class WithdrawCommand extends SubCommand {
     @Override
     public String getName() {
-        return CommandName.HOLD_COMMAND;
+        return CommandName.WITHDRAW_COMMAND;
     }
 
     @Override
@@ -25,7 +25,7 @@ public class HoldCommand extends SubCommand {
 
     @Override
     public String getPermission() {
-        return "expholder.hold";
+        return "expholder.withdraw";
     }
 
     @Override
@@ -36,7 +36,17 @@ public class HoldCommand extends SubCommand {
     @Override
     public void perform(Player sender, String[] args) {
 
-        ExpHolderService.getInstance().depositExp(sender);
+        if (args.length == 2) {
+            try {
+                int level = Integer.parseInt(args[1]);
+                ExpHolderService.getInstance().withdrawExp(sender,level);
+            } catch (NumberFormatException e) {
+                sender.sendMessage("Error: only integer value allowed");
+            }
+            return;
+        }
+
+        ExpHolderService.getInstance().withdrawExp(sender);
 
     }
 

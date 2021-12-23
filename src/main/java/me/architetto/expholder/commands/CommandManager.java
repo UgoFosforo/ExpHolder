@@ -1,8 +1,8 @@
 package me.architetto.expholder.commands;
 
 import me.architetto.expholder.commands.admin.ListCommand;
-import me.architetto.expholder.commands.user.HoldCommand;
-import me.architetto.expholder.commands.user.TakeCommand;
+import me.architetto.expholder.commands.user.DepositCommand;
+import me.architetto.expholder.commands.user.WithdrawCommand;
 import me.architetto.expholder.util.NameUtil;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -17,8 +17,8 @@ public class CommandManager implements TabExecutor{
     private final ArrayList<SubCommand> subcommands = new ArrayList<>();
 
     public CommandManager() {
-        subcommands.add(new HoldCommand());
-        subcommands.add(new TakeCommand());
+        subcommands.add(new DepositCommand());
+        subcommands.add(new WithdrawCommand());
         subcommands.add(new ListCommand());
     }
 

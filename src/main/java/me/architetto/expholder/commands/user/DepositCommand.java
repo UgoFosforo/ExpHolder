@@ -7,10 +7,10 @@ import org.bukkit.entity.Player;
 
 import java.util.List;
 
-public class TakeCommand extends SubCommand {
+public class DepositCommand extends SubCommand {
     @Override
     public String getName() {
-        return CommandName.TAKE_COMMAND;
+        return CommandName.DEPOSIT_COMMAND;
     }
 
     @Override
@@ -25,7 +25,7 @@ public class TakeCommand extends SubCommand {
 
     @Override
     public String getPermission() {
-        return "expholder.take";
+        return "expholder.deposit";
     }
 
     @Override
@@ -36,7 +36,7 @@ public class TakeCommand extends SubCommand {
     @Override
     public void perform(Player sender, String[] args) {
 
-        ExpHolderService.getInstance().withdrawExp(sender);
+        ExpHolderService.getInstance().depositExp(sender);
 
     }
 

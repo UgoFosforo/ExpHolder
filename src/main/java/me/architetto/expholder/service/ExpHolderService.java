@@ -53,6 +53,24 @@ public class ExpHolderService {
         this.userExp.remove(player.getUniqueId());
     }
 
+    public void withdrawExp(Player player, int level) {
+        Integer storedExp = this.userExp.get(player.getUniqueId());
+        if (storedExp == null) {
+            player.sendMessage("Error: no exp is stored");
+            return;
+        }
+
+        int expAtLevel = ExpUtil.getExpAtLevel(level);
+
+        if (storedExp < expAtLevel) {
+            player.sendMessage("Error: not enough experience deposited to reach level " + level);
+            return;
+        }
+        player.giveExp(expAtLevel);
+        player.sendMessage("You have withdrawn " + expAtLevel + " experience");
+        this.userExp.put(player.getUniqueId(),storedExp - expAtLevel);
+    }
+
     public HashMap<UUID,Integer> userExpList() {
         return this.userExp;
     }
