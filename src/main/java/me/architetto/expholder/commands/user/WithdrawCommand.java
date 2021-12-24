@@ -3,6 +3,7 @@ package me.architetto.expholder.commands.user;
 import me.architetto.expholder.commands.CommandName;
 import me.architetto.expholder.commands.SubCommand;
 import me.architetto.expholder.service.ExpHolderService;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public class WithdrawCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return "withdraw all deposited experience or selected amount of levels if enough experience is stored";
+        return "withdraw all deposited experience unit or selected amount of levels if enough experience is stored";
     }
 
     @Override
@@ -41,7 +42,7 @@ public class WithdrawCommand extends SubCommand {
                 int level = Integer.parseInt(args[1]);
                 ExpHolderService.getInstance().withdrawExp(sender,level);
             } catch (NumberFormatException e) {
-                sender.sendMessage("Error: only integer value allowed");
+                sender.sendMessage(ChatColor.RED + "Error: " + ChatColor.RESET + " only integer value allowed");
             }
             return;
         }

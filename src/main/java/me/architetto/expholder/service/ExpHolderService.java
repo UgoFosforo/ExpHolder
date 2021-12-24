@@ -3,6 +3,7 @@ package me.architetto.expholder.service;
 import me.architetto.expholder.config.ConfigManager;
 import me.architetto.expholder.util.ExpUtil;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
@@ -31,15 +32,15 @@ public class ExpHolderService {
 
     //take exp from player
     public void depositExp(Player player) {
-        if (player.getLevel() == 0 && player.getExp() == 0f) {
-            player.sendMessage("Error: not enough exp");
+        if (player.getLevel() == 0 && player.getExp() == 0f)
             return;
-        }
+
         int expToStore = ExpUtil.getPlayerExp(player);
         this.userExp.merge(player.getUniqueId(), expToStore, Integer::sum);
         player.setExp(0f);
         player.setLevel(0);
-        player.sendMessage("You have deposited " + expToStore + " experience");
+        player.sendMessage(ChatColor.YELLOW + "You have deposited "
+                + ChatColor.AQUA + expToStore + ChatColor.YELLOW + " experience unit");
         player.playSound(player.getLocation(), Sound.BLOCK_BARREL_CLOSE,1,1);
     }
 
@@ -47,29 +48,32 @@ public class ExpHolderService {
     public void withdrawExp(Player player) {
         Integer storedExp = this.userExp.get(player.getUniqueId());
         if (storedExp == null) {
-            player.sendMessage("Error: no exp is stored");
+            player.sendMessage(ChatColor.RED + "Error: " + ChatColor.RESET + " you have no experience deposited");
             return;
         }
         player.giveExp(storedExp);
-        player.sendMessage("You have withdrawn " + storedExp + " experience");
+        player.sendMessage(ChatColor.YELLOW + "You have withdrawn " + ChatColor.AQUA + storedExp
+                + ChatColor.YELLOW + " experience unit");
         this.userExp.remove(player.getUniqueId());
     }
 
     public void withdrawExp(Player player, int level) {
         Integer storedExp = this.userExp.get(player.getUniqueId());
         if (storedExp == null) {
-            player.sendMessage("Error: no exp is stored");
+            player.sendMessage(ChatColor.RED + "Error: " + ChatColor.RESET + " you have no experience deposited");
             return;
         }
 
         int expAtLevel = ExpUtil.getExpAtLevel(level);
 
         if (storedExp < expAtLevel) {
-            player.sendMessage("Error: not enough experience deposited to reach level " + level);
+            player.sendMessage(ChatColor.RED + "Error: " + ChatColor.RESET
+                    + " not enough experience deposited to reach level " + level);
             return;
         }
         player.giveExp(expAtLevel);
-        player.sendMessage("You have withdrawn " + expAtLevel + " experience");
+        player.sendMessage(ChatColor.YELLOW + "You have withdrawn " + ChatColor.AQUA + expAtLevel
+                + ChatColor.YELLOW + " experience");
         this.userExp.put(player.getUniqueId(),storedExp - expAtLevel);
     }
 
@@ -78,7 +82,8 @@ public class ExpHolderService {
     }
 
     public void loadData() {
-        Bukkit.getConsoleSender().sendMessage("Load expHolder data...");
+        Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "[ExpHolder]"
+                + ChatColor.RESET +  " Load expHolder data...");
 
         ConfigManager configManager = ConfigManager.getInstance();
 
@@ -96,7 +101,8 @@ public class ExpHolderService {
     }
 
     public void saveData() {
-        Bukkit.getConsoleSender().sendMessage("Save expHolder data...");
+        Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "[ExpHolder]"
+                + ChatColor.RESET + " Save expHolder data...");
         ConfigManager cm = ConfigManager.getInstance();
         cm.getConfig("data.yml")
                 .getKeys(false).forEach(key -> cm.setData(cm.getConfig("data.yml"),key,null));

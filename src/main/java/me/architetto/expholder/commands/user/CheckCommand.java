@@ -3,6 +3,7 @@ package me.architetto.expholder.commands.user;
 import me.architetto.expholder.commands.CommandName;
 import me.architetto.expholder.commands.SubCommand;
 import me.architetto.expholder.service.ExpHolderService;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -17,7 +18,7 @@ public class CheckCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return "check amount of experience deposited";
+        return "check amount of experience unit deposited";
     }
 
     @Override
@@ -40,10 +41,11 @@ public class CheckCommand extends SubCommand {
         HashMap<UUID,Integer> expList = ExpHolderService.getInstance().userExpList();
         Integer expStored = expList.get(sender.getUniqueId());
         if (expStored == null) {
-            sender.sendMessage("You have no experience deposited");
+            sender.sendMessage(ChatColor.YELLOW + "You have no experience deposited");
             return;
         }
-        sender.sendMessage("You have " + expStored + " experience deposited");
+        sender.sendMessage(ChatColor.YELLOW + "You have " + ChatColor.AQUA + expStored
+                + ChatColor.YELLOW + " experience unit deposited");
     }
 
     @Override

@@ -4,6 +4,7 @@ import me.architetto.expholder.commands.CommandName;
 import me.architetto.expholder.commands.SubCommand;
 import me.architetto.expholder.service.ExpHolderService;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
@@ -42,7 +43,7 @@ public class ListCommand extends SubCommand {
         HashMap<UUID,Integer> userExp = ExpHolderService.getInstance().userExpList();
         userExp.forEach((uuid, integer) -> {
             OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(uuid);
-            sender.sendMessage("name : " + offlinePlayer.getName() + " || stored exp: " + integer);
+            sender.sendMessage(ChatColor.YELLOW + offlinePlayer.getName() + " : " + ChatColor.AQUA + integer);
         });
 
 

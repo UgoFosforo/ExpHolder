@@ -30,7 +30,7 @@ public class CommandManager implements TabExecutor{
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         if (!(sender instanceof Player)) {
-            sender.sendMessage("Error: can't run commands from console");
+            sender.sendMessage(ChatColor.RED + "Error: " + ChatColor.RESET + " can't run commands from console");
             return true;
         }
 
@@ -43,12 +43,14 @@ public class CommandManager implements TabExecutor{
                     SubCommand subCommand = getSubcommands().get(i);
 
                     if (!sender.hasPermission(subCommand.getPermission())) {
-                        sender.sendMessage("Error: can't run commands from console");
+                        sender.sendMessage(ChatColor.RED + "Error: " + ChatColor.RESET
+                                + " can't run commands from console");
                         return true;
                     }
 
                     if (args.length < subCommand.getArgsRequired()) {
-                        sender.sendMessage("Error: incorrect syntax");
+                        sender.sendMessage(ChatColor.RED + "Error: " + ChatColor.RESET
+                                + " incorrect syntax");
                         return true;
                     }
 
