@@ -3,6 +3,7 @@ package me.architetto.expholder.service;
 import me.architetto.expholder.config.ConfigManager;
 import me.architetto.expholder.util.ExpUtil;
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 
@@ -39,6 +40,7 @@ public class ExpHolderService {
         player.setExp(0f);
         player.setLevel(0);
         player.sendMessage("You have deposited " + expToStore + " experience");
+        player.playSound(player.getLocation(), Sound.BLOCK_BARREL_CLOSE,1,1);
     }
 
     //give back player's exp

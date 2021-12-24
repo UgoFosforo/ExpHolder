@@ -1,35 +1,33 @@
-package me.architetto.expholder.commands.admin;
+package me.architetto.expholder.commands.user;
 
 import me.architetto.expholder.commands.CommandName;
 import me.architetto.expholder.commands.SubCommand;
 import me.architetto.expholder.service.ExpHolderService;
-import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
-public class ListCommand extends SubCommand {
+public class CheckCommand extends SubCommand {
     @Override
     public String getName() {
-        return CommandName.LIST_COMMAND;
+        return CommandName.CHECK_COMMAND;
     }
 
     @Override
     public String getDescription() {
-        return "complete list of all players that have experience deposited";
+        return "check amount of experience deposited";
     }
 
     @Override
     public String getSyntax() {
-        return "/expholder " + CommandName.LIST_COMMAND;
+        return "/expholder " + CommandName.CHECK_COMMAND;
     }
 
     @Override
     public String getPermission() {
-        return "expholder.list";
+        return "null";
     }
 
     @Override
@@ -39,13 +37,13 @@ public class ListCommand extends SubCommand {
 
     @Override
     public void perform(Player sender, String[] args) {
-        HashMap<UUID,Integer> userExp = ExpHolderService.getInstance().userExpList();
-        userExp.forEach((uuid, integer) -> {
-            OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(uuid);
-            sender.sendMessage("name : " + offlinePlayer.getName() + " || stored exp: " + integer);
-        });
-
-
+        HashMap<UUID,Integer> expList = ExpHolderService.getInstance().userExpList();
+        Integer expStored = expList.get(sender.getUniqueId());
+        if (expStored == null) {
+            sender.sendMessage("You have no experience deposited");
+            return;
+        }
+        sender.sendMessage("You have " + expStored + " experience deposited");
     }
 
     @Override

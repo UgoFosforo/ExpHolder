@@ -15,12 +15,12 @@ public class WithdrawCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return "null";
+        return "withdraw all deposited experience or selected amount of levels if enough experience is stored";
     }
 
     @Override
     public String getSyntax() {
-        return "null";
+        return "/expholder " + CommandName.WITHDRAW_COMMAND + " [level]";
     }
 
     @Override

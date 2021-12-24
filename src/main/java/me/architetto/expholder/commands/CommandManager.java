@@ -1,9 +1,11 @@
 package me.architetto.expholder.commands;
 
 import me.architetto.expholder.commands.admin.ListCommand;
+import me.architetto.expholder.commands.user.CheckCommand;
 import me.architetto.expholder.commands.user.DepositCommand;
 import me.architetto.expholder.commands.user.WithdrawCommand;
 import me.architetto.expholder.util.NameUtil;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -20,6 +22,7 @@ public class CommandManager implements TabExecutor{
         subcommands.add(new DepositCommand());
         subcommands.add(new WithdrawCommand());
         subcommands.add(new ListCommand());
+        subcommands.add(new CheckCommand());
     }
 
     @SuppressWarnings("NullableProblems")
@@ -60,7 +63,8 @@ public class CommandManager implements TabExecutor{
                 SubCommand subCommand = getSubcommands().get(i);
                 if (!sender.hasPermission(subCommand.getPermission()))
                     continue;
-                sender.sendMessage(" >> " + subCommand.getName());
+                sender.sendMessage(ChatColor.YELLOW + subCommand.getSyntax()
+                        + "\n " + ChatColor.AQUA + subCommand.getDescription());
 
             }
         }

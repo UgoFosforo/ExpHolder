@@ -15,12 +15,12 @@ public class DepositCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return "null";
+        return "deposit all the experience possessed";
     }
 
     @Override
     public String getSyntax() {
-        return "null";
+        return "/expholder " + CommandName.DEPOSIT_COMMAND;
     }
 
     @Override
