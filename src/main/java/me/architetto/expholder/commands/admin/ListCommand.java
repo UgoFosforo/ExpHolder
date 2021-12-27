@@ -41,9 +41,14 @@ public class ListCommand extends SubCommand {
     @Override
     public void perform(Player sender, String[] args) {
         HashMap<UUID,Integer> userExp = ExpHolderService.getInstance().userExpList();
+        if (userExp.isEmpty()) {
+            sender.sendMessage(ChatColor.YELLOW + "No user has experience units deposited");
+            return;
+        }
         userExp.forEach((uuid, integer) -> {
             OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(uuid);
-            sender.sendMessage(ChatColor.YELLOW + offlinePlayer.getName() + " : " + ChatColor.AQUA + integer);
+            if (offlinePlayer.getName() != null)
+                sender.sendMessage(ChatColor.YELLOW + offlinePlayer.getName() + "  :  " + ChatColor.AQUA + integer);
         });
 
 

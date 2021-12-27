@@ -50,7 +50,7 @@ public class CommandManager implements TabExecutor{
 
                     if (args.length < subCommand.getArgsRequired()) {
                         sender.sendMessage(ChatColor.RED + "Error: " + ChatColor.RESET
-                                + " incorrect syntax");
+                                + " not enough arguments");
                         return true;
                     }
 

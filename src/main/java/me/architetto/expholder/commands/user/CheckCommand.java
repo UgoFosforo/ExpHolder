@@ -28,7 +28,7 @@ public class CheckCommand extends SubCommand {
 
     @Override
     public String getPermission() {
-        return "null";
+        return "expholder.check";
     }
 
     @Override
